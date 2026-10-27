@@ -26,6 +26,23 @@ Contributions are welcome. Found a failure or a workaround? [Open a "New lesson"
 
 The four official skills are copied **unchanged** from SolidCraft 0.24.0 (see [NOTICE](NOTICE)). The other nine are original to this repository.
 
+## Example: a dog-leg mechanism, before and after
+
+A walking-leg mechanism driven by two shafts, modelled twice with the same agent. **v1** was built before the `solidcraft-assemblies` skill existed. **v2** was rebuilt from scratch following that skill. Each version is shown at home and with the crank turned to 120 degrees.
+
+| | v1 (before the skill) | v2 (with the skill) |
+|---|---|---|
+| Home | ![v1 at home](docs/images/dog-leg/dog-leg-v1-home.png) | ![v2 at home](docs/images/dog-leg/dog-leg-v2-home.png) |
+| Crank at 120 degrees | ![v1 with the crank at 120 degrees](docs/images/dog-leg/dog-leg-v1-crank120.png) | ![v2 with the crank at 120 degrees](docs/images/dog-leg/dog-leg-v2-crank120.png) |
+
+| Counted from the design files | v1 | v2 |
+|---|---|---|
+| Distinct bodies (part types) | 5 | 7 |
+| Instances placed | 15 | 18 |
+| Joints | 20 revolute | 19 revolute, 4 rigid |
+
+These counts are not a score. The skill does not aim for the fewest part types. It aims for one body per part type with every identical or mirrored part placed as an instance, a layer map along the rotation axis so moving links do not sweep through each other, and a check through the full range of motion before delivering.
+
 ## Install
 
 Claude Code, for all projects:
