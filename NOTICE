@@ -1,0 +1,25 @@
+SolidCraft-Agent-Skills
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This repository contains four skills that are copied unchanged from the
+SolidCraft project (https://github.com/bherbruck/solidcraft, version 0.24.0,
+commit 9cba66c14d38d17504d0c3efb9e04194435743b7, folder `skills/`):
+
+  skills/solidcraft-modeling
+  skills/solidcraft-editing
+  skills/solidcraft-checking
+  skills/solidcraft-mechanisms
+
+SolidCraft is dual-licensed under MIT or Apache-2.0, at the user's option.
+Copyright (c) 2026 SolidCraft contributors. These copies are used under
+Apache-2.0. The original licence texts are in the SolidCraft repository
+(LICENSE-MIT and LICENSE-APACHE).
+
+All other skills in `skills/` are original to this repository. They mention
+public tutorials and public speed-modeling challenges only to record
+lessons learned. They contain no drawings, videos or solution files from
+those sources, and the authors of those works are not affiliated with this
+repository.
+
+SolidCraft is a trademark of its respective owners. This repository is an
+independent community project.
