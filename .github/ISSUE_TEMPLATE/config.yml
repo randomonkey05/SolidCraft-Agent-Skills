@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a bug in SolidCraft itself
+    url: https://github.com/tangency-labs/solidcraft/issues
+    about: Problems in the SolidCraft app or its MCP server belong in the SolidCraft project, not here.

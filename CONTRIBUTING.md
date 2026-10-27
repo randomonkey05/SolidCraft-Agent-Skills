@@ -2,6 +2,8 @@
 
 Everyone is welcome to use and improve these skills. The most useful contributions are **new, verified lessons**: a failure you hit in SolidCraft, what caused it, and a workaround that you checked.
 
+The quickest way is the **New lesson** issue form (Issues, New issue). It asks for exactly the fields below.
+
 ## What a good lesson looks like
 
 - The command and parameters involved, the symptom (the exact error text if there is one), and the workaround.

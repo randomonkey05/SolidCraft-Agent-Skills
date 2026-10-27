@@ -2,7 +2,7 @@ SolidCraft-Agent-Skills
 Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 This repository contains four skills that are copied unchanged from the
-SolidCraft project (https://github.com/bherbruck/solidcraft, version 0.24.0,
+SolidCraft project (https://github.com/tangency-labs/solidcraft, version 0.24.0,
 commit 9cba66c14d38d17504d0c3efb9e04194435743b7, folder `skills/`):
 
   skills/solidcraft-modeling
@@ -13,7 +13,8 @@ commit 9cba66c14d38d17504d0c3efb9e04194435743b7, folder `skills/`):
 SolidCraft is dual-licensed under MIT or Apache-2.0, at the user's option.
 Copyright (c) 2026 SolidCraft contributors. These copies are used under
 Apache-2.0. The original licence texts are in the SolidCraft repository
-(LICENSE-MIT and LICENSE-APACHE).
+(LICENSE-MIT and LICENSE-APACHE). The project used to live at
+github.com/bherbruck/solidcraft, which redirects to the address above.
 
 All other skills in `skills/` are original to this repository. They mention
 public tutorials and public speed-modeling challenges only to record

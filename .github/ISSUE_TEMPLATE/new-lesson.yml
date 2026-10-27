@@ -1,0 +1,75 @@
+name: New lesson
+description: Report a SolidCraft failure, a workaround, or a correction to a skill
+title: "[lesson] "
+labels: ["lesson"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for sharing what you found. A good lesson lets the next person avoid the same failure.
+        Please do not attach copyrighted drawings, videos, transcripts or solution files. Describe what you learned instead.
+  - type: input
+    id: version
+    attributes:
+      label: SolidCraft version
+      description: For example 0.24.0.
+      placeholder: "0.24.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Which skill does this belong to?
+      options:
+        - solidcraft-modeling
+        - solidcraft-editing
+        - solidcraft-checking
+        - solidcraft-mechanisms
+        - solidcraft-assemblies
+        - solidcraft-robust-build-order
+        - solidcraft-speed-modeling-lessons
+        - solidcraft-drawing-and-tutorial-reading
+        - solidcraft-tutorial-recipes
+        - solidcraft-sheet-metal
+        - solidcraft-shell-and-tangent-arcs
+        - solidcraft-sweep-and-boolean-hangs
+        - solidcraft-3d-print-dfm
+        - A new skill
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: command
+    attributes:
+      label: Command and parameters involved
+      placeholder: "solid.fillet {edges: [...], radius: 2}"
+    validations:
+      required: true
+  - type: textarea
+    id: symptom
+    attributes:
+      label: Symptom
+      description: What went wrong. Include the exact error text, or say it hung, crashed or returned a wrong volume.
+    validations:
+      required: true
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround
+      description: What worked instead, step by step.
+    validations:
+      required: true
+  - type: textarea
+    id: check
+    attributes:
+      label: How you verified it
+      description: A number the next reader can compare against, such as a volume, a bounding box or a face count. If you could not confirm it, say so and it will be marked (UNVERIFIED).
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Before you submit
+      options:
+        - label: This contains no copyrighted drawings, videos or solution files, and no personal data or machine paths.
+          required: true
