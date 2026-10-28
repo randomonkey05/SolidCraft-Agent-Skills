@@ -44,6 +44,10 @@ A walking-leg mechanism driven by two shafts, modelled twice with the same agent
 
 These counts are not a score. The skill does not aim for the fewest part types. It aims for one body per part type with every identical or mirrored part placed as an instance, a layer map along the rotation axis so moving links do not sweep through each other, and a check through the full range of motion before delivering.
 
+## More examples
+
+- [CD-ROM player flat-pack enclosure, two versions](examples/cdrom-player-flatpack/README.md): large folded panels and round ear tabs at the screw locations, with 3MF and SolidCraft design files.
+
 ## Install
 
 Claude Code, for all projects:

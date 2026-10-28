@@ -10,6 +10,7 @@ Load `solidcraft-sheet-metal` first for the base commands. This skill adds the f
 Background material is in `references/`:
 - [`references/flat-pack-dfm-and-bend-formulas.md`](references/flat-pack-dfm-and-bend-formulas.md): design rules for slits, bridges and tabs, bend formulas and K-factors.
 - [`references/cdrom-player-das-pod-analysis.md`](references/cdrom-player-das-pod-analysis.md): architecture and dimensions read from the maker's assembly video, and what the reference build did.
+- [`examples/cdrom-player-flatpack/`](../../examples/cdrom-player-flatpack/README.md): the two CD-ROM player models (3MF and SolidCraft design files). v1 folds tall walls straight from the base. v2 uses large folded panels with round ear tabs at the screw locations.
 
 ## 1. Read the architecture first
 - A flat pack is a few flat sheets: 2 main plates joined by a perforated or slit bend line, 2 separate side plates and hardware. Side plates are NOT folded from the base. Check the real flat patterns or photos before modelling: the first version of the CD-ROM model was wrong because the walls were assumed instead of read.

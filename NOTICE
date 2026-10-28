@@ -28,5 +28,9 @@ measurements read from the public assembly video of the das_POD CD-ROM Player 01
 They are the repository's own summaries and estimates. They are not endorsed by,
 and contain no files from, the authors or makers of those works.
 
+The models in `examples/cdrom-player-flatpack/` are approximate teaching reconstructions
+by the repository author. They are not manufacturing files, and the design of the
+product they depict remains the maker's.
+
 SolidCraft is a trademark of its respective owners. This repository is an
 independent community project.
