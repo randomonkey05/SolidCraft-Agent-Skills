@@ -1,0 +1,309 @@
+{
+  "format": "solidcraft/41",
+  "name": "Chapa_Convert_Chanfro_EliteEngineers",
+  "units": "mm",
+  "params": [],
+  "features": [
+    {
+      "id": 1,
+      "name": "Perfil",
+      "suppressed": false,
+      "type": "sketch",
+      "plane": {
+        "type": "custom",
+        "plane": {
+          "origin": [
+            0.0,
+            -60.0,
+            0.0
+          ],
+          "x_dir": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "y_dir": [
+            -0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "sketch": {
+        "points": [
+          {
+            "id": "origin",
+            "pos": [
+              0.0,
+              0.0
+            ],
+            "fixed": true
+          },
+          {
+            "id": "l1.start",
+            "pos": [
+              -60.0,
+              0.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l1.end",
+            "pos": [
+              60.0,
+              0.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l2.end",
+            "pos": [
+              60.0,
+              120.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l3.end",
+            "pos": [
+              -10.0,
+              120.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l4.end",
+            "pos": [
+              -60.0,
+              70.0
+            ],
+            "fixed": false
+          }
+        ],
+        "curves": [
+          {
+            "id": "l1",
+            "type": "line",
+            "a": 1,
+            "b": 2,
+            "construction": false
+          },
+          {
+            "id": "l2",
+            "type": "line",
+            "a": 2,
+            "b": 3,
+            "construction": false
+          },
+          {
+            "id": "l3",
+            "type": "line",
+            "a": 3,
+            "b": 4,
+            "construction": false
+          },
+          {
+            "id": "l4",
+            "type": "line",
+            "a": 4,
+            "b": 5,
+            "construction": false
+          },
+          {
+            "id": "l5",
+            "type": "line",
+            "a": 5,
+            "b": 1,
+            "construction": false
+          }
+        ],
+        "constraints": [],
+        "counters": {
+          "l": 5
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Extrude1",
+      "suppressed": false,
+      "body_names": [
+        "Body1"
+      ],
+      "param_names": [
+        "d1"
+      ],
+      "type": "extrude",
+      "sketch": 1,
+      "profiles": {
+        "type": "all"
+      },
+      "extent": {
+        "distance": "120",
+        "convention": "total_distance",
+        "direction": "positive"
+      },
+      "operation": "new_body"
+    },
+    {
+      "id": 3,
+      "name": "Furo",
+      "suppressed": false,
+      "type": "sketch",
+      "plane": {
+        "type": "custom",
+        "plane": {
+          "origin": [
+            0.0,
+            -50.0,
+            0.0
+          ],
+          "x_dir": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "y_dir": [
+            -0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "sketch": {
+        "points": [
+          {
+            "id": "origin",
+            "pos": [
+              0.0,
+              0.0
+            ],
+            "fixed": true
+          },
+          {
+            "id": "c1.center",
+            "pos": [
+              0.0,
+              55.0
+            ],
+            "fixed": false
+          }
+        ],
+        "curves": [
+          {
+            "id": "c1",
+            "type": "circle",
+            "c": 1,
+            "r": 25.0,
+            "construction": false
+          }
+        ],
+        "constraints": [],
+        "counters": {
+          "c": 1
+        }
+      }
+    },
+    {
+      "id": 4,
+      "name": "Extrude2",
+      "suppressed": false,
+      "param_names": [
+        "d2"
+      ],
+      "type": "extrude",
+      "sketch": 3,
+      "profiles": {
+        "type": "all"
+      },
+      "extent": {
+        "distance": "140",
+        "convention": "total_distance",
+        "direction": "positive"
+      },
+      "operation": "cut",
+      "targets": [
+        "Body1"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "ConvertToSheetMetal1",
+      "suppressed": false,
+      "edge_names": [
+        "F2:side:l1|F2:start",
+        "F2:side:l1|F2:top",
+        "F2:side:l1|F2:side:l5",
+        "F2:side:l1|F2:side:l2"
+      ],
+      "face_names": [
+        "F2:side:l1"
+      ],
+      "type": "sheet_convert",
+      "body": "Body1",
+      "face": [
+        0.0,
+        -120.0,
+        0.0
+      ],
+      "rule": "Steel5",
+      "bends": [
+        [
+          0.0,
+          -60.0,
+          0.0
+        ],
+        [
+          0.0,
+          -180.0,
+          0.0
+        ],
+        [
+          -60.0,
+          -120.0,
+          0.0
+        ],
+        [
+          60.0,
+          -120.0,
+          0.0
+        ]
+      ]
+    }
+  ],
+  "next_id": 6,
+  "reserved_body_names": [
+    "Body1"
+  ],
+  "next_component_color_index": 0,
+  "sheet": {
+    "rules": [
+      {
+        "name": "Steel5",
+        "thickness": "5",
+        "k_factor": "0.44",
+        "bend_radius": "Thickness",
+        "relief_width": "Thickness",
+        "relief_depth": "Thickness * 0.5",
+        "corner_relief": "Thickness * 4.0",
+        "corner_relief_shape": "notch",
+        "hem_gap": "0.01 mm",
+        "gap": "Thickness"
+      }
+    ],
+    "active": "Steel5"
+  },
+  "appearances": {
+    "bodies": {
+      "Body1": {
+        "name": "Aluminum - Satin",
+        "color": [
+          204,
+          208,
+          214
+        ],
+        "opacity": 1.0
+      }
+    }
+  }
+}

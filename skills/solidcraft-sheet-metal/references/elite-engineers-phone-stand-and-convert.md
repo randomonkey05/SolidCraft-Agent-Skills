@@ -1,6 +1,6 @@
 # Two silent sheet-metal tutorials, read from frames and rebuilt in SolidCraft
 
-Two public SolidCraft sheet-metal tutorial videos by the YouTube channel Elite Engineers ("Sheet Metal Kickoff", a phone stand, and "Convert to Sheet Metal First Test"). Both are silent, so every dimension below was read from video frames (about +-2-3 %). The first video was recorded on SolidCraft 0.25.1. The numbers here are this repository's own reading and rebuild, not the author's drawings, and the repository has no affiliation with the channel. Watch the videos for the full demonstration.
+Two public SolidCraft sheet-metal tutorial videos by the YouTube channel [Elite Engineers](https://www.youtube.com/@elite_engineers) ("Sheet Metal Kickoff", a phone stand, and "Convert to Sheet Metal First Test"). Both are silent, so every dimension below was read from video frames (about +-2-3 %). The first video was recorded on SolidCraft 0.25.1. The numbers here are this repository's own reading and rebuild, not the author's drawings, and the repository has no affiliation with the channel. Watch the videos for the full demonstration. The rebuilt models, with their flat patterns, are in [`examples/sheet-metal-tutorials/`](../../../examples/sheet-metal-tutorials/README.md).
 
 How the dimensions were obtained, and the checks that worked, are in section 1 of [`../SKILL.md`](../SKILL.md). The two validated rebuilds are recipes 6 and 7 there. This note adds what was read from the video and where the rebuild differs.
 

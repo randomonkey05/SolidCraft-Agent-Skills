@@ -29,9 +29,12 @@ They are the repository's own summaries and estimates. They are not endorsed by,
 and contain no files from, the authors or makers of those works.
 
 The note in `skills/solidcraft-sheet-metal/references/` summarises two public tutorial
-videos by the YouTube channel Elite Engineers, read from frames, with the repository's
+videos by the YouTube channel Elite Engineers (https://www.youtube.com/@elite_engineers), read from frames, with the repository's
 own rebuild results. It contains no files from the author, who is not affiliated with
 this repository.
+
+The models in `examples/sheet-metal-tutorials/` are the repository author's own rebuilds of
+those tutorials from frames, not the author's files.
 
 The models in `examples/cdrom-player-flatpack/` are approximate teaching reconstructions
 by the repository author. They are not manufacturing files, and the design of the

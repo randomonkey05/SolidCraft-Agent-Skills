@@ -1,0 +1,813 @@
+{
+  "format": "solidcraft/41",
+  "name": "Suporte_Telemovel_EliteEngineers",
+  "units": "mm",
+  "params": [],
+  "features": [
+    {
+      "id": 1,
+      "name": "Perfil",
+      "suppressed": false,
+      "type": "sketch",
+      "plane": {
+        "type": "custom",
+        "plane": {
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "x_dir": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "y_dir": [
+            -0.0,
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "sketch": {
+        "points": [
+          {
+            "id": "origin",
+            "pos": [
+              0.0,
+              0.0
+            ],
+            "fixed": true
+          },
+          {
+            "id": "l1.start",
+            "pos": [
+              0.0,
+              0.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l1.end",
+            "pos": [
+              90.0,
+              0.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l2.end",
+            "pos": [
+              72.635,
+              98.481
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l3.end",
+            "pos": [
+              35.135,
+              33.529
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l4.end",
+            "pos": [
+              13.484,
+              46.029
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l5.end",
+            "pos": [
+              17.366,
+              60.518
+            ],
+            "fixed": false
+          }
+        ],
+        "curves": [
+          {
+            "id": "l1",
+            "type": "line",
+            "a": 1,
+            "b": 2,
+            "construction": false
+          },
+          {
+            "id": "l2",
+            "type": "line",
+            "a": 2,
+            "b": 3,
+            "construction": false
+          },
+          {
+            "id": "l3",
+            "type": "line",
+            "a": 3,
+            "b": 4,
+            "construction": false
+          },
+          {
+            "id": "l4",
+            "type": "line",
+            "a": 4,
+            "b": 5,
+            "construction": false
+          },
+          {
+            "id": "l5",
+            "type": "line",
+            "a": 5,
+            "b": 6,
+            "construction": false
+          }
+        ],
+        "constraints": [
+          {
+            "id": "k1",
+            "type": "coincident",
+            "p": 0,
+            "q": 1
+          }
+        ],
+        "counters": {
+          "k": 1,
+          "l": 5
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "ContourFlange1",
+      "suppressed": false,
+      "body_names": [
+        "Suporte"
+      ],
+      "param_names": [
+        "d1"
+      ],
+      "type": "sheet_contour",
+      "sketch": 1,
+      "curves": [
+        "l1",
+        "l2",
+        "l3",
+        "l4",
+        "l5"
+      ],
+      "distance": "80",
+      "flip": true
+    },
+    {
+      "id": 3,
+      "name": "Unfold1",
+      "suppressed": false,
+      "type": "sheet_unfold",
+      "body": "Suporte"
+    },
+    {
+      "id": 4,
+      "name": "CortePlano",
+      "suppressed": false,
+      "type": "sketch",
+      "plane": {
+        "type": "custom",
+        "plane": {
+          "origin": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "x_dir": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "y_dir": [
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "sketch": {
+        "points": [
+          {
+            "id": "origin",
+            "pos": [
+              0.0,
+              0.0
+            ],
+            "fixed": true
+          },
+          {
+            "id": "l1.start",
+            "pos": [
+              11.695,
+              -2.015
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l1.end",
+            "pos": [
+              87.18,
+              -15.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l2.end",
+            "pos": [
+              245.0,
+              -10.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l3.end",
+            "pos": [
+              283.5,
+              -10.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l4.end",
+            "pos": [
+              283.5,
+              1.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l5.end",
+            "pos": [
+              -1.0,
+              1.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l6.end",
+            "pos": [
+              -1.0,
+              -11.87
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l7.end",
+            "pos": [
+              0.0,
+              -11.87
+            ],
+            "fixed": false
+          },
+          {
+            "id": "a1.center",
+            "pos": [
+              10.00005357212471,
+              -11.870365451648757
+            ],
+            "fixed": false
+          },
+          {
+            "id": "a1.start",
+            "pos": [
+              11.695,
+              -2.015
+            ],
+            "fixed": false
+          },
+          {
+            "id": "a1.end",
+            "pos": [
+              -1.7763568394002505e-15,
+              -11.87
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l8.start",
+            "pos": [
+              11.695,
+              -77.985
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l8.end",
+            "pos": [
+              87.18,
+              -65.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l9.end",
+            "pos": [
+              245.0,
+              -70.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l10.end",
+            "pos": [
+              283.5,
+              -70.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l11.end",
+            "pos": [
+              283.5,
+              -81.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l12.end",
+            "pos": [
+              -1.0,
+              -81.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l13.end",
+            "pos": [
+              -1.0,
+              -68.13
+            ],
+            "fixed": false
+          },
+          {
+            "id": "l14.end",
+            "pos": [
+              0.0,
+              -68.13
+            ],
+            "fixed": false
+          },
+          {
+            "id": "a2.center",
+            "pos": [
+              10.000053572124722,
+              -68.12963454835118
+            ],
+            "fixed": false
+          },
+          {
+            "id": "a2.start",
+            "pos": [
+              0.0,
+              -68.13
+            ],
+            "fixed": false
+          },
+          {
+            "id": "a2.end",
+            "pos": [
+              11.694999999999991,
+              -77.98499999999994
+            ],
+            "fixed": false
+          },
+          {
+            "id": "p1",
+            "pos": [
+              129.5,
+              -50.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "p2",
+            "pos": [
+              184.5,
+              -50.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "p3",
+            "pos": [
+              184.5,
+              -30.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "p4",
+            "pos": [
+              129.5,
+              -30.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "a3.center",
+            "pos": [
+              184.5,
+              -40.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "a4.center",
+            "pos": [
+              129.5,
+              -40.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "p5",
+            "pos": [
+              227.5,
+              -50.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "p6",
+            "pos": [
+              300.0,
+              -50.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "p7",
+            "pos": [
+              300.0,
+              -30.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "p8",
+            "pos": [
+              227.5,
+              -30.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "a5.center",
+            "pos": [
+              300.0,
+              -40.0
+            ],
+            "fixed": false
+          },
+          {
+            "id": "a6.center",
+            "pos": [
+              227.5,
+              -40.0
+            ],
+            "fixed": false
+          }
+        ],
+        "curves": [
+          {
+            "id": "l1",
+            "type": "line",
+            "a": 1,
+            "b": 2,
+            "construction": false
+          },
+          {
+            "id": "l2",
+            "type": "line",
+            "a": 2,
+            "b": 3,
+            "construction": false
+          },
+          {
+            "id": "l3",
+            "type": "line",
+            "a": 3,
+            "b": 4,
+            "construction": false
+          },
+          {
+            "id": "l4",
+            "type": "line",
+            "a": 4,
+            "b": 5,
+            "construction": false
+          },
+          {
+            "id": "l5",
+            "type": "line",
+            "a": 5,
+            "b": 6,
+            "construction": false
+          },
+          {
+            "id": "l6",
+            "type": "line",
+            "a": 6,
+            "b": 7,
+            "construction": false
+          },
+          {
+            "id": "l7",
+            "type": "line",
+            "a": 7,
+            "b": 8,
+            "construction": false
+          },
+          {
+            "id": "a1",
+            "type": "arc",
+            "c": 9,
+            "a": 10,
+            "b": 11,
+            "construction": false,
+            "reversed": true
+          },
+          {
+            "id": "l8",
+            "type": "line",
+            "a": 12,
+            "b": 13,
+            "construction": false
+          },
+          {
+            "id": "l9",
+            "type": "line",
+            "a": 13,
+            "b": 14,
+            "construction": false
+          },
+          {
+            "id": "l10",
+            "type": "line",
+            "a": 14,
+            "b": 15,
+            "construction": false
+          },
+          {
+            "id": "l11",
+            "type": "line",
+            "a": 15,
+            "b": 16,
+            "construction": false
+          },
+          {
+            "id": "l12",
+            "type": "line",
+            "a": 16,
+            "b": 17,
+            "construction": false
+          },
+          {
+            "id": "l13",
+            "type": "line",
+            "a": 17,
+            "b": 18,
+            "construction": false
+          },
+          {
+            "id": "l14",
+            "type": "line",
+            "a": 18,
+            "b": 19,
+            "construction": false
+          },
+          {
+            "id": "a2",
+            "type": "arc",
+            "c": 20,
+            "a": 21,
+            "b": 22,
+            "construction": false
+          },
+          {
+            "id": "l15",
+            "type": "line",
+            "a": 23,
+            "b": 24,
+            "construction": false
+          },
+          {
+            "id": "a3",
+            "type": "arc",
+            "c": 27,
+            "a": 24,
+            "b": 25,
+            "construction": false
+          },
+          {
+            "id": "l16",
+            "type": "line",
+            "a": 25,
+            "b": 26,
+            "construction": false
+          },
+          {
+            "id": "a4",
+            "type": "arc",
+            "c": 28,
+            "a": 26,
+            "b": 23,
+            "construction": false
+          },
+          {
+            "id": "l17",
+            "type": "line",
+            "a": 29,
+            "b": 30,
+            "construction": false
+          },
+          {
+            "id": "a5",
+            "type": "arc",
+            "c": 33,
+            "a": 30,
+            "b": 31,
+            "construction": false
+          },
+          {
+            "id": "l18",
+            "type": "line",
+            "a": 31,
+            "b": 32,
+            "construction": false
+          },
+          {
+            "id": "a6",
+            "type": "arc",
+            "c": 34,
+            "a": 32,
+            "b": 29,
+            "construction": false
+          }
+        ],
+        "constraints": [
+          {
+            "id": "k1",
+            "type": "coincident",
+            "p": 1,
+            "q": 10
+          },
+          {
+            "id": "k2",
+            "type": "coincident",
+            "p": 8,
+            "q": 11
+          },
+          {
+            "id": "k3",
+            "type": "coincident",
+            "p": 19,
+            "q": 21
+          },
+          {
+            "id": "k4",
+            "type": "coincident",
+            "p": 12,
+            "q": 22
+          },
+          {
+            "id": "k5",
+            "type": "tangent",
+            "a": 16,
+            "b": 17
+          },
+          {
+            "id": "k6",
+            "type": "tangent",
+            "a": 18,
+            "b": 17
+          },
+          {
+            "id": "k7",
+            "type": "tangent",
+            "a": 16,
+            "b": 19
+          },
+          {
+            "id": "k8",
+            "type": "tangent",
+            "a": 18,
+            "b": 19
+          },
+          {
+            "id": "k9",
+            "type": "equal",
+            "a": 19,
+            "b": 17
+          },
+          {
+            "id": "k10",
+            "type": "tangent",
+            "a": 20,
+            "b": 21
+          },
+          {
+            "id": "k11",
+            "type": "tangent",
+            "a": 22,
+            "b": 21
+          },
+          {
+            "id": "k12",
+            "type": "tangent",
+            "a": 20,
+            "b": 23
+          },
+          {
+            "id": "k13",
+            "type": "tangent",
+            "a": 22,
+            "b": 23
+          },
+          {
+            "id": "k14",
+            "type": "equal",
+            "a": 23,
+            "b": 21
+          }
+        ],
+        "counters": {
+          "a": 6,
+          "k": 14,
+          "l": 18,
+          "p": 8
+        }
+      }
+    },
+    {
+      "id": 5,
+      "name": "Extrude1",
+      "suppressed": false,
+      "param_names": [
+        "d2"
+      ],
+      "type": "extrude",
+      "sketch": 4,
+      "profiles": {
+        "type": "all"
+      },
+      "extent": {
+        "distance": "4",
+        "convention": "total_distance",
+        "direction": "positive"
+      },
+      "operation": "cut",
+      "targets": [
+        "Suporte"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Refold1",
+      "suppressed": false,
+      "type": "sheet_unfold",
+      "body": "Suporte",
+      "refold": true
+    }
+  ],
+  "next_id": 7,
+  "next_component_color_index": 0,
+  "sheet": {
+    "rules": [
+      {
+        "name": "Steel25",
+        "thickness": "2.5",
+        "k_factor": "0.44",
+        "bend_radius": "Thickness",
+        "relief_width": "Thickness",
+        "relief_depth": "Thickness * 0.5",
+        "corner_relief": "Thickness * 4.0",
+        "corner_relief_shape": "notch",
+        "hem_gap": "0.01 mm",
+        "gap": "Thickness"
+      }
+    ],
+    "active": "Steel25"
+  },
+  "appearances": {
+    "bodies": {
+      "Suporte": {
+        "name": "Aluminum - Satin",
+        "color": [
+          204,
+          208,
+          214
+        ],
+        "opacity": 1.0
+      }
+    }
+  }
+}
