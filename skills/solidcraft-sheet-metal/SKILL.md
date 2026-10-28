@@ -9,10 +9,13 @@ Validated on an edge-flange bracket (75 and 45 deg flanges), a U-channel (contou
 
 Suggested habits: send a screenshot of the folded and the flat state, and keep one folder per model with `_v2` names for changes.
 
+**Flat-pack enclosures** (laser-cut plates, ear tabs, bend slits, perforation, side plates; for example a CD-ROM player enclosure): use the separate skill [`solidcraft-sheet-metal-flatpack`](../solidcraft-sheet-metal-flatpack/SKILL.md) together with this one. Key limits found there: `sheet.fold` is a half-plane fold; a fold whose moving side already has a bend is refused (fold from the fixed side outward); the default direction of an edge flange is the bottom-face normal (`flip:true` for the opposite); about 700 real holes per sheet is the boolean budget.
+
 ## 1. Read the source first
 - A bent part has TWO sets of dimensions, folded and flat. If no flat pattern is given, build the part, then state that the flat dimensions are assumed and ask for the expected flat pattern. (On the edge-flange bracket the first build gave 98.069 against 103.217 expected.)
 - Tutorial videos: transcribe the audio first. A silent video (mean volume around -91 dB gives an empty transcript) needs its dimensions read from frames: make contact sheets with ffmpeg and measure unlabeled positions in pixels against a known width, for example 50 mm = 260 px.
 - Spoken numbers are often wrong. The frames give the numbers.
+- When real flat patterns are provided, compare them against the model feature by feature (perforation, windows, steps, ears, holes, relief notches) before rebuilding.
 
 ## 2. Rule first
 `sheet.manage_rules {name, thickness, k_factor (0.44 default), bend_radius ("Thickness" or a number as a string), relief_width, relief_depth, corner_relief, corner_relief_shape notch|round|rectangular|tear, hem_gap, gap, angle_display, active:true}`. `sheet.rules` lists them.
@@ -29,7 +32,7 @@ Bend maths: BA = (R + K*t) * angle_rad. The outer setback at 90 deg = R + t. Fla
 | Joggle or several bends from one edge | edge flange with `then:[{angle,height,flip}]` (up to 16 further bends), for example {height:25,angle:"90 deg",then:[{angle:"90 deg",height:10,flip:true}]} |
 | Flange following a path along the edge | `sheet.path_flange {edge:[x,y,z], sketch, curves:[l1,l2], radius?}`: the sketch is an open chain of lines on a plane across the edge, for example plane {origin:[0,30,0], x_dir:[1,0,0], y_dir:[0,0,1]} with lines [[0,1],[0,16],[-10,16]]. It starts at the edge and goes outward |
 | Folded edge (teardrop, open, closed hem) | `sheet.hem {edges:[[x,y,z]], length (to the outer face), gap?, flip?}` |
-| Bend a flat plate along a drawn line | `sheet.fold {sketch, curve, angle:"60 deg", radius, position centerline|start|end|mould, fixed:[x,y,z] on the side that stays, flip}` (sketch on the plate plane, line crossing the whole width) |
+| Bend a flat plate along a drawn line | `sheet.fold {sketch, curve, angle:"60 deg", radius, position centerline|start|end|mould, fixed:[x,y,z] on the side that stays, flip}` (sketch on the plate plane, line crossing the whole width). Half-plane semantics: it bends everything beyond the line |
 | Turn a solid box or shell into sheet metal | `sheet.convert {body, face:[x,y,z] (fixed face), bends:[[x,y,z] on each sharp edge], rule}`, then edge flanges for the lips |
 | Hole pattern for flat pattern or DXF only | `sheet.perforate {diameter, pitch, margin, pattern staggered|square}`: affects the flat pattern, DXF and volume, NOT the B-rep |
 | Back to flat or re-bend | `sheet.unfold`, `sheet.refold` |
@@ -43,9 +46,10 @@ Bend maths: BA = (R + K*t) * angle_rad. The outer setback at 90 deg = R + t. Fla
 
 ## 5. Cuts and features
 - Holes on flat panels parallel to the sketch plane can be cut folded (sketch plus `solid.extrude cut distance t`).
-- Features on bends or on non-parallel panels: `sheet.unfold`, sketch on XY at z=0 in FLAT coordinates, extrude cut, then `sheet.refold`. Cutting folded is refused.
+- Features on bends or on non-parallel panels: `sheet.unfold`, sketch on XY at z=0 in FLAT coordinates, extrude cut, then `sheet.refold`. Cutting folded is refused (`machining intersects a folded bend`).
 - Use cut planes just outside the sheet (offset) with distance > thickness. Avoid tool faces coplanar with sheet faces (they can hang the app).
 - Rounded corners: never `solid.fillet` on sheet metal (it is dropped after refold). Cut each corner in the unfolded state with a closed sketch (two lines plus an R arc). Slots: `sketch.slot.center_to_center`.
+- A sketch plane's normal is x_dir x y_dir, and a cut with a positive distance goes along that normal. Use a negative distance (or flip the plane) when the cut changes no bodies.
 
 ## 6. Fitting to a target flat pattern
 - Measure the flat size with `sheet.unfold` plus `measure` bbox, then `undo`. Never read `sheet.flat_pattern` in full (huge JSON). If needed pick only `flat_size_mm` and the bends.
@@ -60,5 +64,5 @@ Bend maths: BA = (R + K*t) * angle_rad. The outer setback at 90 deg = R + t. Fla
 - Name sketches uniquely. Reusing a name after `undo` keeps the old geometry.
 - The hem edge choice and `flip` decide the direction. Verify the bbox after each hem and `undo` if it is wrong.
 - Cylinder or counterbore tools starting coplanar with a face hung the app twice: start 0.5-1 mm inside empty space.
-- Perforate is not geometry. Cut real holes if the B-rep needs them.
+- Perforate is not geometry. Cut real holes if the B-rep needs them (budget about 700 holes per sheet, see `solidcraft-sheet-metal-flatpack`).
 - Use the counts as a sanity check: after contour, hem and holes the clamp had 10 cylinder faces (`face_types` in `measure`).

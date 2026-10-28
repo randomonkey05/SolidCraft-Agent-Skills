@@ -31,6 +31,7 @@ body:
         - solidcraft-drawing-and-tutorial-reading
         - solidcraft-tutorial-recipes
         - solidcraft-sheet-metal
+        - solidcraft-sheet-metal-flatpack
         - solidcraft-shell-and-tangent-arcs
         - solidcraft-sweep-and-boolean-hangs
         - solidcraft-3d-print-dfm

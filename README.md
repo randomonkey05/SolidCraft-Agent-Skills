@@ -20,11 +20,12 @@ Contributions are welcome. Found a failure or a workaround? [Open a "New lesson"
 | [`solidcraft-drawing-and-tutorial-reading`](skills/solidcraft-drawing-and-tutorial-reading/SKILL.md) | builds from a drawing, PDF, tutorial video or transcript | this repo |
 | [`solidcraft-tutorial-recipes`](skills/solidcraft-tutorial-recipes/SKILL.md) | gets a task described in GUI terms and needs the matching MCP commands | this repo |
 | [`solidcraft-sheet-metal`](skills/solidcraft-sheet-metal/SKILL.md) | models bent sheet-metal parts: flanges, hems, folds, flat pattern, DXF | this repo |
+| [`solidcraft-sheet-metal-flatpack`](skills/solidcraft-sheet-metal-flatpack/SKILL.md) | models laser-cut flat-pack enclosures: ear tabs, bend slits, perforation, separate side plates; includes reference notes on slit design and bend formulas | this repo |
 | [`solidcraft-shell-and-tangent-arcs`](skills/solidcraft-shell-and-tangent-arcs/SKILL.md) | uses `solid.shell`, or a shell fails or hangs | this repo |
 | [`solidcraft-sweep-and-boolean-hangs`](skills/solidcraft-sweep-and-boolean-hangs/SKILL.md) | sweeps (twist, scale) or cuts and joins on a swept body | this repo |
 | [`solidcraft-3d-print-dfm`](skills/solidcraft-3d-print-dfm/SKILL.md) | designs a model for FDM 3D printing | this repo |
 
-The four official skills are copied **unchanged** from SolidCraft 0.24.0 (see [NOTICE](NOTICE)). The other nine are original to this repository.
+The four official skills are copied **unchanged** from SolidCraft 0.24.0 (see [NOTICE](NOTICE)). The other ten are original to this repository.
 
 ## Example: a dog-leg mechanism, before and after
 
