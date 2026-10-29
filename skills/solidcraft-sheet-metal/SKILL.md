@@ -61,6 +61,8 @@ Bend maths: BA = (R + K*t) * angle_rad. The outer setback at 90 deg = R + t. Fla
 ## 7. Export
 `save`, `sheet.export_dxf {body, path, bend_notes:true}`, `sheet.export_bend_table {body, format:"csv", path}`, `export` as 3mf or stl, and an isometric screenshot. The folder must exist before `save` or `export` (error `its folder does not exist`), so create it first.
 
+Before sending a flat pattern to a shop, run the manufacturability review in `solidcraft-dfm-review` (generic checks in its `sheet-metal.md`; for SendCutSend, `sendcutsend.md` with per-SKU limits and a DXF measuring script). Build the rule with the shop's bend radius and K factor first, so the flat length matches what they will cut.
+
 ## 8. Traps
 - Device calls time out at about 60 s. Save a checkpoint before risky operations. If a function fails or hangs, do not retry it: call `running` once and tell the user. If every call says no SolidCraft app is listening on 127.0.0.1:7878, the app is closed: ask the user to open it.
 - Name sketches uniquely. Reusing a name after `undo` keeps the old geometry.

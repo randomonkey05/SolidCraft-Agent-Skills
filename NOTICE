@@ -16,6 +16,19 @@ Apache-2.0. The original licence texts are in the SolidCraft repository
 (LICENSE-MIT and LICENSE-APACHE). The project used to live at
 github.com/bherbruck/solidcraft, which redirects to the address above.
 
+Three skills are adapted from the skills of earthtojake/text-to-cad
+(https://github.com/earthtojake/text-to-cad, commit
+a7cf2c470e345d6b6a2fe373a73e0420ff64ad2a, MIT licence, Copyright (c) 2026
+Thompson Labs LLC): solidcraft-dfm-review (from `dfm` and `sendcutsend`),
+solidcraft-step-parts (from `step-parts`) and solidcraft-engineering-drawing
+(from `engineering-drawing`). They are rewritten for SolidCraft and their helper
+scripts are original. The table in skills/solidcraft-3d-print-dfm/references/
+process-limits.md is taken from its `dfam-check` skill. Those skills' MIT
+licence permits this use; the licence text is in the text-to-cad repository.
+solidcraft-dfm-review reads public data files published by
+SendCutSend, and solidcraft-step-parts reads the public step.parts catalog;
+neither service is affiliated with this repository.
+
 All other skills in `skills/` are original to this repository. They mention
 public tutorials and public speed-modeling challenges only to record
 lessons learned. They contain no drawings, videos or solution files from

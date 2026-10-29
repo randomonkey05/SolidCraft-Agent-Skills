@@ -24,8 +24,11 @@ Contributions are welcome. Found a failure or a workaround? [Open a "New lesson"
 | [`solidcraft-shell-and-tangent-arcs`](skills/solidcraft-shell-and-tangent-arcs/SKILL.md) | uses `solid.shell`, or a shell fails or hangs | this repo |
 | [`solidcraft-sweep-and-boolean-hangs`](skills/solidcraft-sweep-and-boolean-hangs/SKILL.md) | sweeps (twist, scale) or cuts and joins on a swept body | this repo |
 | [`solidcraft-3d-print-dfm`](skills/solidcraft-3d-print-dfm/SKILL.md) | designs a model for FDM 3D printing | this repo |
+| [`solidcraft-dfm-review`](skills/solidcraft-dfm-review/SKILL.md) | reviews a sheet-metal or CNC part for manufacturability, or checks a flat-pattern DXF against SendCutSend's per-SKU limits before ordering | adapted from text-to-cad (MIT) |
+| [`solidcraft-step-parts`](skills/solidcraft-step-parts/SKILL.md) | needs real screws, bearings, standoffs or motors in an assembly: step.parts search, checksum, `file.insert_step` | adapted from text-to-cad (MIT) |
+| [`solidcraft-engineering-drawing`](skills/solidcraft-engineering-drawing/SKILL.md) | is asked for an engineering drawing or dimensioned views of a part | adapted from text-to-cad (MIT) |
 
-The four official skills are copied **unchanged** from SolidCraft 0.24.0 (see [NOTICE](NOTICE)). The other ten are original to this repository.
+The four official skills are copied **unchanged** from SolidCraft 0.24.0 (see [NOTICE](NOTICE)). Three more are adapted from [earthtojake/text-to-cad](https://github.com/earthtojake/text-to-cad) (MIT, see [NOTICE](NOTICE)), and `solidcraft-3d-print-dfm` gained a cross-check against the published limits in the same project. The other ten are original to this repository (counting `solidcraft-3d-print-dfm`).
 
 ## Example: a dog-leg mechanism, before and after
 

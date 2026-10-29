@@ -38,6 +38,14 @@ Written for a 0.4 mm nozzle on a Bambu Lab A1 mini (180 x 180 x 180 mm bed). The
 - Avoid the 0.28 mm "Extra Draft" profile for parts with 0.4 mm gaps.
 - After slicing, inspect the preview for support material inside gaps.
 
+## Cross-check against published limits
+`references/process-limits.md` tabulates published DfAM limits for FDM, SLS, SLA, metal PBF and MJF. Where it differs from the working values above (FDM: supported wall 1.2 mm against our 0.8 mm, unsupported wall 1.6 mm, hole 2.0 mm minimum, bridge 10 mm against our 5 mm):
+- Treat our 0.8 mm wall, 5 mm bridge and 45 deg values as the floor for a printer you have tuned and for parts that carry no load. They come from a public DFM guide and early prints, and several are still (UNVERIFIED).
+- For structural walls, thin tall plates, or a printer you have not tuned, use the published figure (1.2 mm wall) as the default.
+- Tell the maintainers what you measured. When a real print confirms a value, update the line above and remove (UNVERIFIED).
+- SolidCraft has no wall-thickness analysis. Measure the wall with `measure` on two parallel faces, and export an STL for any mesh-based overhang or support analysis.
+- Powder processes (SLS, MJF) need powder-escape holes in hollow parts instead of support-angle limits.
+
 ## Final review before handing over the model
 1. Minimum wall >= 0.8 mm everywhere, including at fillet and hole edges.
 2. No overhang > 45 deg without a chamfer, and no bridge > 5 mm.
