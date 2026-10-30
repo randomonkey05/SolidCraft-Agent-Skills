@@ -29,6 +29,16 @@ solidcraft-dfm-review reads public data files published by
 SendCutSend, and solidcraft-step-parts reads the public step.parts catalog;
 neither service is affiliated with this repository.
 
+Three further skills take ideas from other MIT-licensed projects and are rewritten
+for SolidCraft, with no text copied: solidcraft-requirements-and-sanity and
+solidcraft-delivery-gate from the process gates of capwitf/mechanical-cad-skills
+(https://github.com/capwitf/mechanical-cad-skills), and solidcraft-hole-fastener-rules
+from the hole, fastener and gear guidance of wzyn20051216/solidworks-automation-skill
+(https://github.com/wzyn20051216/solidworks-automation-skill). The reference values in
+the latter are standard figures (ISO 273 clearance holes, coarse tap drills, gear
+formulas) and starting values the repository author asks readers to confirm. Neither
+project is affiliated with this repository.
+
 All other skills in `skills/` are original to this repository. They mention
 public tutorials and public speed-modeling challenges only to record
 lessons learned. They contain no drawings, videos or solution files from
