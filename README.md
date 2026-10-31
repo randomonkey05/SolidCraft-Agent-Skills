@@ -53,6 +53,7 @@ These counts are not a score. The skill does not aim for the fewest part types. 
 ## More examples
 
 - [CD-ROM player flat-pack enclosure, two versions](examples/cdrom-player-flatpack/README.md): large folded panels and round ear tabs at the screw locations, with 3MF and SolidCraft design files.
+- [6-DOF stepper robot arm from a single prompt](examples/robot-arm-6dof/README.md): a 1 m reach, 0.5 kg arm with printed cycloidal reducers, designed in one session from a vague brief using these skills. Includes the prompt, the build steps, what failed, what is and is not verified, and STEP, 3MF, design and animation files.
 - [Two sheet-metal tutorials rebuilt](examples/sheet-metal-tutorials/README.md): a phone stand with cuts made in the flat state, and a block converted to sheet metal, with 3MF, design, DXF and bend-table files.
 
 ## Install
