@@ -27,8 +27,32 @@ There was no drawing, sketch or reference design. The agent worked from this tex
 | [`printed-structure-v3.3mf`](printed-structure-v3.3mf) | Printed structure parts with the bolt holes (base, tower, arm and forearm plates, wrist brackets, gripper body and fingers, J2 belt plate and spacers) |
 | [`printed-module-S.3mf`](printed-module-S.3mf), [`printed-module-M.3mf`](printed-module-M.3mf) | Printed parts of the two cycloidal modules (small and medium) |
 | [`robot-arm-6dof-animation.mp4`](robot-arm-6dof-animation.mp4) | The motion study |
+| [`drawings/`](drawings) | A3 drawings of modules M and S (2 sheets each) as PDF, DXF and PNG |
 
 Part and component names in the design are in Portuguese (`Braco` arm, `Ante` forearm, `Garra` gripper, `Elo` link, `Estrutura` structure, `Modulo` module, `Placa` plate, `Suporte` bracket, `Correia` belt, `Pedestal`, `Torre` tower).
+
+## Engineering drawings of the two modules
+
+After the model was finished the agent produced A3 drawings of both cycloidal modules with the `solidcraft-engineering-drawing` skill: module M (J2/J3, 146 mm) and module S (J1/J4/J5/J6, 100 mm), two sheets each. They are in [`drawings/`](drawings) as PDF, DXF and PNG.
+
+![Module M, sheet 1: assembly](drawings/module-M-sheet1.png)
+
+![Module M, sheet 2: details](drawings/module-M-sheet2.png)
+
+![Module S, sheet 1: assembly](drawings/module-S-sheet1.png)
+
+![Module S, sheet 2: details](drawings/module-S-sheet2.png)
+
+Sheet 1 is the assembly: section A-A with hatching by part group, the output-side view, an isometric, length and diameter dimensions, numbered balloons tied to a 10-item bill of materials (printed parts, discs, eccentric shaft, catalogue bearings, ring pins, output pins) and notes. Sheet 2 holds the motor-side view, a hole schedule (bore, motor pattern, mounting pattern), the cycloidal disc drawn alone and a table of disc data (lobes, ring pins, eccentricity, thickness, phase of the second disc, ratio).
+
+How the drawings were made, and the engineering judgement behind them:
+
+- **Numbers come from the model, not from memory.** Z levels, diameters, hole sizes and pitch circles, and the disc tip, root and bore were read with `measure` and `model.faces`. The ring-pin count and eccentricity come from the build parameters and are labelled as such on the sheet.
+- **Real section views.** SolidCraft's DXF export of a view carries visible lines only, with no sections or hatching. Each body was exported alone in the cut view, the lines were turned into closed polygons (coordinates rounded to 3 decimals so loops close), matched against the cut-plane faces from `model.faces`, and hatched in the DXF. The hatch angle and density differ by group: housing, discs, catalogue parts.
+- **Standard sheet.** The skill's A3 template (frame, zone letters, title block) with the usual conventions: balloons in one sorted row, dimensions outside the views, a note that no tolerances are assigned.
+- **The sheet is checked by looking at it.** Every sheet was rendered to PNG and re-read. Overlaps found that way (balloons against the isometric, the notes against the section, the disc running off the sheet) were fixed by moving views and changing scales.
+
+Limits, stated on the sheets and repeated here: no tolerances or fits, retaining rings and keys are not modelled, the materials of the eccentric shaft and pins are assumed (steel), the section plane passes through pins at y=0 so they appear cut, the disc side view is simplified, the module M disc outline was mirrored from a half-cut body, and the module S housing hole circle (91 mm) was read from the exported DXF. Only the dimensions used on the sheets were checked against the model, not the whole drawing.
 
 ## How it was built
 
@@ -43,6 +67,7 @@ Part and component names in the design are in Portuguese (`Braco` arm, `Ante` fo
 7. **Bolt holes at every interface:** flange and housing patterns on both medium modules, brackets, gripper body, pedestal, tower and the shoulder belt plate, with clearance sizes for M3, M4 and M5.
 8. **Joints and motion study.** Six revolute joints on the real axes and a 160-step study.
 9. **Interference checks and fixes**, then the animation and the final exports.
+10. **Drawings of the two modules** (assembly with section and bill of materials, details with hole schedule and disc), see above.
 
 The session had the whole skill set of this repository available (including `solidcraft-assemblies`, `solidcraft-hole-fastener-rules` and `solidcraft-delivery-gate`); `solidcraft-requirements-and-sanity` is the one invoked explicitly by the prompt.
 
