@@ -52,3 +52,10 @@ Written for a 0.4 mm nozzle on a Bambu Lab A1 mini (180 x 180 x 180 mm bed). The
 3. Gaps are present and not filled (check a section view).
 4. The part fits the bed, has a flat first layer and no tiny floating bodies.
 5. Send an isometric preview plus notes on orientation and slicer settings.
+
+## Related skills (fill gaps, do not duplicate)
+- Screw holes, edge distance, web between holes, pocket floors: `solidcraft-hole-fastener-rules`. It has no printed-part row, so the wall and clearance limits above (with the published cross-check) win for FDM; use its hole sizes and edge distances as starting values.
+- Real screws, nuts, bearings and motors that sit in a print: `solidcraft-step-parts` for catalogue dimensions.
+- Moving or multi-part prints: `solidcraft-assemblies` (clearance as one parameter, layer map) and `solidcraft-mechanisms` (joints, motion sweep, conflicts).
+- Booleans or sweeps that hang: `solidcraft-sweep-and-boolean-hangs`; shells: `solidcraft-shell-and-tangent-arcs`.
+- Final check and the Verified / Inferred / Unverified report: `solidcraft-delivery-gate`, which reads this skill.

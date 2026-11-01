@@ -46,3 +46,11 @@ Constants used: t 1.5, R 1, K 0.4, BA 2.5133, outer setback 2.5, outer mould cor
 
 ## 6. Simplifications to declare in the report
 Slit rows on bends, narrower sections and strip flaps, rounded plate corners, logo emboss, partial perforation, keyhole slots. Always list the differences from the real flat pattern and what was simplified.
+
+## 7. Related skills (fill gaps, do not duplicate)
+- Rule, bend radius, relief, flat size, DXF: `solidcraft-sheet-metal`.
+- Manufacturability of the flat pattern, and a DXF going to a shop: `solidcraft-dfm-review` (generic sheet-metal checks, SendCutSend per-SKU limits).
+- Hole edge distance, web between holes and minimum wall for sheet-metal panels (not given above): `solidcraft-hole-fastener-rules`, sheet-metal row. Use the stricter value when this skill, `solidcraft-dfm-review` and that one differ, and name them.
+- Several sheets, fasteners, feet and interference: `solidcraft-assemblies`; real M3 or M4 hardware: `solidcraft-step-parts`.
+- A flat-pattern or assembly drawing as a deliverable: `solidcraft-engineering-drawing`.
+- Final check and report: `solidcraft-delivery-gate`, which reads this skill.

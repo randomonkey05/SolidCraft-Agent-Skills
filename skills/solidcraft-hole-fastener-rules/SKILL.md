@@ -63,3 +63,11 @@ Not covered without a specialist route or an engineer: helical, bevel, internal,
 
 ## 4. Report
 List the hole types chosen and which values are starting values still to confirm.
+
+## 5. Related skills (fill gaps, do not duplicate)
+- FDM walls, overhang, bridges, clearances: `solidcraft-3d-print-dfm` (this skill has no printed-part row).
+- Bend radius, relief, flat size: `solidcraft-sheet-metal`; tabs, slits, perforation: `solidcraft-sheet-metal-flatpack`.
+- Manufacturability of holes in sheet-metal or CNC parts, and shop limits: `solidcraft-dfm-review`. Where its numbers differ from the table above, use the stricter one and name both.
+- Real screw, nut and insert geometry instead of the nominal sizes: `solidcraft-step-parts`.
+- Clearance across moving or mating parts: `solidcraft-assemblies`.
+- The checks that read this data: `solidcraft-requirements-and-sanity` (before building) and `solidcraft-delivery-gate` (before delivering).

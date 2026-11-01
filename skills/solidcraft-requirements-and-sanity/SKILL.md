@@ -68,7 +68,7 @@ Before calling a no-reference design finished, fill the rows that apply. Each ro
 |---|---|
 | Function and load path | where force enters, where it leaves |
 | Interfaces | dimensioned, not only drawn |
-| Material and process | and the limits that follow (see `solidcraft-3d-print-dfm`, `solidcraft-sheet-metal`, `solidcraft-sheet-metal-flatpack`) |
+| Material and process | and the limits that follow (see `solidcraft-3d-print-dfm`, `solidcraft-sheet-metal`, `solidcraft-sheet-metal-flatpack`, `solidcraft-dfm-review`; the delivery gate lists every process skill in one table) |
 | Minimum wall or section | measured value vs the process minimum |
 | Hole edge and hole-to-hole distance | smallest value in the part, vs the starting values in `solidcraft-hole-fastener-rules` |
 | Clearances and fits | shaft, bearing, fastener, tool and assembly access |

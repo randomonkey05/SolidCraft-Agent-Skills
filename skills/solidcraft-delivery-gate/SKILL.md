@@ -33,6 +33,31 @@ When the final design has screw holes, tapped holes, counterbores, slots, pocket
 
 A value measured on the final design is **Verified**. A value taken from the build parameters is **Inferred**. A value with no known process or load behind its limit is **Unverified**: say which starting value was used and that it still needs confirming.
 
+## Process limits: where to look
+This skill holds no design-for-manufacturing numbers of its own. Take the process from the design lock (see `solidcraft-requirements-and-sanity`), load the skills for it, and check the final geometry against what they say. Do not rely on memory of their values.
+
+| Process or feature | Load |
+|---|---|
+| FDM print | `solidcraft-3d-print-dfm` (walls, overhang, bridges, clearances, orientation, bed; `references/process-limits.md` for published limits) |
+| Bent sheet metal, building it | `solidcraft-sheet-metal` (rule, bend radius, relief, flat size, DXF) |
+| Flat-pack sheet metal | `solidcraft-sheet-metal-flatpack` (tabs, bend slits, perforation budget, declared simplifications) |
+| Sheet metal or CNC manufacturability, or a DXF going to a shop | `solidcraft-dfm-review` (evidence per feature; SendCutSend per-SKU limits) |
+| Holes, slots, pockets, edge distance, web, wall (any process) | `solidcraft-hole-fastener-rules` |
+| Spur gears | `solidcraft-hole-fastener-rules`, section 3 |
+| Real screws, nuts, bearings, standoffs, motors | `solidcraft-step-parts` (catalogue dimensions instead of guessed ones) |
+| Several parts, instances, static clearances | `solidcraft-assemblies` |
+| Joints, motion, closed loops, degrees of freedom | `solidcraft-mechanisms`, plus the verification sweep in `solidcraft-assemblies` |
+| Exact STEP comparison, parameter ranges, regression tests | `solidcraft-checking` |
+| A drawing or dimensioned sheet is a deliverable | `solidcraft-engineering-drawing` (read-back checklist) |
+| Built from a drawing under time pressure, or the build crashed or hung | `solidcraft-speed-modeling-lessons` |
+| Process or material still unknown | `solidcraft-requirements-and-sanity`; until it is answered, those rows stay Unverified |
+
+Filling gaps between skills:
+1. Check every applicable row of the table, not only the first skill that matches. A printed part with screw holes needs both `solidcraft-3d-print-dfm` and `solidcraft-hole-fastener-rules`; a laser-cut part with screw holes needs `solidcraft-dfm-review` and `solidcraft-hole-fastener-rules`.
+2. If the process skill has no value for a feature (for example hole edge distance in a flat-pack plate), take it from the next skill in the table and say where it came from.
+3. If two skills give different limits for the same feature, use the stricter one and name both.
+4. If no skill has a value, mark the claim Unverified and list the missing value under open risks. Do not invent a limit, and do not edit another skill from here: report the gap so it can be added there.
+
 ## Optional manifest
 For files that go to other people, write `<model>_manifest.json` next to them: file name, size, modified time, SHA-256, the source design, tool versions, checks actually run, and the three claim lists below. Only record checks that really ran.
 

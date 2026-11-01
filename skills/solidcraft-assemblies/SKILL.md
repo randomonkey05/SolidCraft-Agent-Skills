@@ -72,3 +72,11 @@ Verification (mandatory)
 - Do not split a single rigid part into several; do not merge parts that must move relative to each other.
 - A batch with one invalid command rolls back entirely; fix and resend.
 - Do not kill processes by pattern in the shell (it can kill your own session).
+
+## Related skills (fill gaps, do not duplicate)
+- This skill plans repeatability and motion layout. For the full joint and motion tooling (joint origins, rigid groups, motion links, closed loops, motion studies, a drive that moves nothing) use `solidcraft-mechanisms`. For the parts themselves use `solidcraft-modeling`.
+- Clearance values per process: `solidcraft-3d-print-dfm` for printed parts, `solidcraft-hole-fastener-rules` for fastener holes. The 0.2-0.4 mm above is a generic starting point; the process skill wins, and the stricter value applies if they differ.
+- Real fasteners, bearings, standoffs and motors instead of placeholders: `solidcraft-step-parts`.
+- Flat-pack sheet assemblies: `solidcraft-sheet-metal-flatpack`.
+- Exact comparison and regression checks on the result: `solidcraft-checking`.
+- Final check and report: `solidcraft-delivery-gate`, which reads this skill.
