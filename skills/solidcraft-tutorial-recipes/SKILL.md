@@ -13,10 +13,11 @@ Public SolidCraft video tutorials teach the GUI. Every recipe below was re-run t
 | New design | `new_design` (ask first if the open design has unsaved work) |
 | Create sketch on the Right / Front / Top plane | `sketch.create plane` `YZ` / `XZ` / `XY`. On XZ the sketch y axis is -Z, so for a profile drawn upright use a custom plane `{origin:[0,0,0], x_dir:[1,0,0], y_dir:[0,0,1]}` (normal -Y) |
 | Sketch on a top face or offset plane | `sketch.create {plane:"XY", offset:10}` or `construct.plane.offset` |
-| Draw a line chain with horizontal/vertical constraints | `sketch.line {points:[[..],..]}`. A polyline already gets horizontal and vertical constraints where lines are axis-aligned. Give exact coordinates instead of constrain-and-dimension steps |
+| Draw a line chain with horizontal/vertical constraints | `sketch.line {points:[[..],..]}` (`points`, not p0/p1; tested on 0.29.0). A polyline already gets horizontal and vertical constraints where lines are axis-aligned. Give exact coordinates instead of constrain-and-dimension steps |
 | Polygon with a dimension across flats | `sketch.polygon.inscribed {center, radius, sides, angle}`; radius = across-flats / (2 cos(180/n)), for example a hexagon across flats 40 gives radius 23.0940108 |
 | Sketch fillet on polygon corners | `sketch.fillet {points:[p1..pn], radius}` |
-| Offset a closed profile inward | `sketch.offset {curves:[all curve ids after the fillet], distance, side:[0,0]}` gives 2 profiles (a ring) |
+| Sketch chamfer on several corners (0.29 "several corners in one operation") | `sketch.chamfer.equal_distance {points:[corners], distance}`, `sketch.chamfer.two_distance`, `sketch.chamfer.distance_angle`. One call, one operation; the sketch gets more degrees of freedom. Tested on 0.29.0 on a 60 x 40 x 10 plate: 4 corners d=5 -> 23 500 mm3, 3 corners 8/4 -> 23 520 mm3, 4 corners d=6 at 30 deg -> 23 584.3 mm3, all exact |
+| Offset a closed profile inward | `sketch.offset {curves:[all curve ids after the fillet], distance, side:[0,0]}` gives 2 profiles (a ring). Sign: on a rectangle chain a POSITIVE distance went INWARD and a negative one outward (tested on 0.29.0). A wrong sign gives a full block: check the volume with `measure` |
 | Centre-point arc | `sketch.arc.center_point {center, radius, start, end}` |
 | Equal constraint, dimensions, Tie | Only needed for parametric designs. For speed, compute the points and skip them. Use `sketch.dimension` when parameters must drive the geometry |
 | Finish sketch | `sketch.finish` |
@@ -27,10 +28,21 @@ Public SolidCraft video tutorials teach the GUI. Every recipe below was re-run t
 | Extrude cut, Extent All, Symmetric | `solid.extrude {through_all:true, direction:"symmetric", operation:"cut", targets:[body]}` |
 | Revolve with an axis line | `solid.revolve {axis:"y" (sketch axis) or a line id, angle:"360 deg", operation:"new"}`. For a partial turn such as `"270 deg"` use 360 minus the GUI's -90. On a custom upright plane the axis `"y"` is world Z |
 | Offset plane | `construct.plane.offset {base:"XY", offset:"11.5", name}` then `sketch.create {plane:"<name>"}` |
-| Fillet | `solid.fillet {edges:[[x,y,z]..], radius}` (one call per fillet group) |
+| Fillet | `solid.fillet {edges:[[x,y,z]..], radius}` (one call per fillet group). Edges that meet at a vertex can go in one call or one at a time; the result is identical (tested, see `solidcraft-modeling`). After a fillet the edge midpoints move: re-pick from `body_topology` |
 | Shell, remove the top face | `solid.shell {faces:[[x,y,z] on the face], thickness, direction:"inside"}` |
 | Circular or polar pattern | `solid.pattern.circular {features:[...], axis:"Z", count:n}`; see trap 1 |
 | Parameters panel (D15 and so on) | `parameters.add {name, value}` and use the name in the dimension |
+
+## Release-video items (0.25 - 0.29): only from the videos, not tested on the MCP
+These come from the SolidCraft release videos and notes. Treat them as GUI facts and test them before relying on them in a recipe.
+- **Name = value in a dimension box (0.25):** typing `pocket diameter = 24 mm` in the size box creates a user parameter and links the dimension. Defining a name in one box and using that new name in the other box of the same operation is not supported; reuse it afterwards. Via MCP use `parameters.add` first.
+- **Value box in extrude (0.26):** typing `plate T = 5 mm` in the distance box creates the parameter. Via MCP: `parameters.add`, then the name in `distance`.
+- **Parameter expressions in rectangle coordinates (0.29):** the corner can be written as `length`, `width`. Not tested here.
+- **Equation curve (0.27):** parametric form with X(t), Y(t), start, end, tolerance, e.g. X = body_width*t, Y = body_depth + wave_amp*sin(2*pi*t); close the profile with three lines and extrude.
+- **Interface only:** toggle radius/diameter on a dimension, Shift+R (repeat last command, default shortcut), freehand lasso selection, settings profiles, status bar, view angles readout, CGA and one-bit themes, saved render shots (look / light / frame / output stages).
+- **Point clouds (0.26):** insert a PLY as a reference display; it is not a scan-to-solid tool.
+- **Copy and paste between designs (0.27, 0.28, 0.29):** the 0.27 video shows a component paste refused with an unknown parameter when it only appears inside an equation, and the workaround of creating that parameter in the empty destination first. My own attempt failed with "nothing copied" because `new_design` clears the clipboard; paste inside the same design works. Cross-design paste is NOT confirmed.
+- **0.28:** flat pattern DXF organises cutting geometry, bend directions and bend notes; select several holes in one operation; infinite construction lines.
 
 ## Validated recipes (mm)
 1. **L-bracket plus hole:** sketch `YZ`, polyline [[0,0],[100,0],[100,80],[75,80],[75,25],[0,25],[0,0]], extrude 50 symmetric new; `solid.hole position [25,87.5,55] diameter 20`. Volume 178 044.6 mm3 (193 750 minus the hole through the 50 mm arm).
@@ -44,8 +56,9 @@ Public SolidCraft video tutorials teach the GUI. Every recipe below was re-run t
 ## Traps found
 1. **`solid.hole` plus `solid.pattern.circular` can be wrong.** On the small flange of recipe 4 the patterned through-all hole removed extra material (4213.8 instead of 4293.1). On recipe 7 (counterbore hole from a face sketch, 6 copies) the pattern matched the analytic volume. Rule: try hole plus pattern, `measure`, and compare with the analytic volume. If it is off, build the hole as `solid.cylinder {diameter, height, base, operation:"cut", targets:[body]}` and pattern that (`solid.pattern.circular {features:["cutname"], axis:"Z", count:4}` gave exactly the analytic volume).
 2. **Edge picks on circular edges** must lie ON the circle (for example [50,0,43.301] for a radius-50 circle at z=43.301), not at a profile midpoint, or you get a `no edge near` error.
-3. **A fillet bigger than the neighbouring wall** fails (`blend is taller than the walls`): the rim of a dish must be taller than the radius.
+3. **A fillet bigger than the neighbouring wall** fails ("blend is taller than the walls", "largest radius that fits is N mm"): the rim of a dish must be taller than the radius. On a plate, the R8 corner rounds belong on the edges that run along the thickness, not along the plate width (picking the wrong edges gave "largest radius that fits is 5 mm").
 4. **Shell with a fillet on the open-face rim** fails when radius > thickness. Fillet the other edges first, shell, and fillet the rim afterwards only if radius < thickness.
 5. A failed step in a batch rolls the WHOLE batch back (including the sketch and revolve before it). Re-send everything with the fix.
 6. **Spoken numbers in transcripts are often wrong** (seen: "14 / 18 / 19" for 40 / 80 / 90 deg, "100" for 90). Extract frames with `ffmpeg -ss <t> -i video.mp4 -frames:v 1` at the dimension moments and read the on-screen labels.
 7. Do not call `sketch.inspect` on large sketches (huge reply). Use `measure` or `sketch.solve`.
+8. **Pick after a fillet:** the edge midpoints change after each fillet, so "no edge at [x,y,z]: nearest edge is 5 mm away" means re-pick from `body_topology`, not a larger radius.

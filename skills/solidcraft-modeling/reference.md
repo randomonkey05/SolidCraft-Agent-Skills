@@ -158,3 +158,7 @@ After `set_parameter L=120` the volume is 35335.2 mm³, and the holes stay in th
 | `<Feature> cannot be patterned or mirrored yet` | Pattern the original feature, for example one 2x2 rectangular pattern. |
 | `an edge is a point [x,y,z], {point} or {body, index}` | An edge pick contained an expression. Use plain numbers. |
 | `boolean Cut: the operation failed ... planar faces only` | See "Primitive booleans" above. |
+
+## Camera (`view.apply`, `screenshot camera`) (tested on 0.29.0)
+- Observer azimuth = -90 deg - yaw. Front view yaw 0, left +pi/2, right -pi/2, back pi; iso is yaw -pi/4, pitch 0.615.
+- `camera: {target, yaw, pitch, distance, fov?}` (radians, mm). A row of parts about 600 mm long fitted in the frame with distance about 650 and pitch 0.45.

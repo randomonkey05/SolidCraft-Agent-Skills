@@ -46,6 +46,15 @@ Work the part out as numbers first. Then build it in a few large `batch` calls, 
   - An edge of the face the shell removes, such as the rim of an open box: round it after the shell, because the shell can fail on it.
   - A fillet between two curved faces, such as a sphere joined to a cylinder: the shell then fails with `offset: only bodies with planes, cylinders, cones, spheres and tori`. Shell first. The inside corner then stays sharp, so the wall there is thinner than `thickness`.
 
+## Fillets and chamfers at corners where edges meet (tested on 0.29.0)
+Tests on 40 mm cubes, picks on the edge midpoints:
+- Three non-coplanar edges that meet at a vertex round with a spherical patch at the corner. One by one and all three in one `solid.fillet` call gave the identical body (R5: 63 376.73 mm3, 10 faces, 1 sphere).
+- All 12 edges of the cube in one call and one by one gave the identical body (R5: 61 590.76 mm3, 26 faces: 12 cylinder, 8 sphere, 6 plane; analytic value 61 592.2).
+- Radius limit on a 40 mm cube: three edges at a vertex pass with R15 (58 768.9 mm3) and R39 (34 758.5 mm3) and fail with R40 ("not supported yet: a fillet larger than the faces next to it"). All 12 edges pass with R19 (35 990.7 mm3) and fail with R20 ("the blend is larger than a corner radius") and R21 ("the blend is larger than the neighbouring faces; the largest radius that fits is 20 mm"). Half of the side is the limit when fillets of neighbouring edges meet. A failed fillet leaves the design unchanged.
+- Not tested: different radii on edges of the same vertex (use separate features and `measure` each).
+- Check by formula. Removal at a vertex with three edges of length L and radius r: 3(1 - pi/4) r^2 (L - r) + r^3 (1 - pi/6). Rounded cube (side a, all 12 edges): (a-2r)^3 + 6r(a-2r)^2 + 3 pi r^2 (a-2r) + 4 pi r^3 / 3. Measured against these: 0.002 % (R5, 12 edges), 0.003 % (R15, 3 edges), 0.013 % (R39, 3 edges) and 0.025 % (R19, 12 edges: 9 mm3 under the analytic value; cause not investigated).
+- Sketch chamfers on several corners: `sketch.chamfer.equal_distance`, `sketch.chamfer.two_distance` and `sketch.chamfer.distance_angle` take `points:[corners]` and are one operation. On a 60 x 40 x 10 plate they gave 23 500, 23 520 and 23 584.3 mm3, all exact. `distance_angle` makes the second leg d*tan(angle). The sketch dof goes up with each chamfer.
+
 ## Verify
 - **Each stage:** run `measure {}` (about 0.9 KB per body) and compare the volume, bbox and face count with your numbers. A cut or hole that leaves the volume unchanged has missed, even though it reported success.
 - **Timeline health:** `inspect_design {"measure":false,"sketches":false}` shows each feature's `error` and `warning`.
@@ -59,12 +68,13 @@ Work the part out as numbers first. Then build it in a few large `batch` calls, 
   - When the server is bridged, `source` defaults to the whole app window and `view` also turns the user's camera, so pass `"source":"model"` and leave out `view` unless the user wants the camera moved.
 
 ## Finish
-`export {path}` writes `.step` for CAD, `.3mf`/`.stl` for printing, or `.urdf` (an assembly with joints, for robot simulators). `save {path}` writes `.solidcraft`.
+`export {path}` writes `.step` for CAD, `.3mf`/`.stl` for printing, or `.urdf` (an assembly with joints, for robot simulators). `save {path}` writes `.solidcraft`. A design saved by 0.29.0 has format `solidcraft/46`, which 0.28 and older cannot open (from the release video): keep the original.
 
 ## Red flags
 
 | Thought | Do instead |
 |---|---|
+| "Offset inward means a negative distance" | On a rectangle chain `sketch.offset` went inward with a POSITIVE distance (0.29.0). A wrong sign gave a full block of 56 700 mm3 instead of 12 900: measure. |
 | "List all commands first" | `reference.md`, or `list_commands {"filter":"<distinctive word>"}`. The unfiltered list is over 100 KB. |
 | "Check positions with body_topology" | `measure` COM and bbox against your numbers. |
 | "Inspect the sketch" | `sketch.solve` returns dof and the profile count in under 100 bytes. Run `sketch.inspect` on its own, never inside a big batch. |

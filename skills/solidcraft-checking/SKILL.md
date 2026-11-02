@@ -7,7 +7,7 @@ description: Use alongside solidcraft-modeling and solidcraft-editing whenever y
 
 `solidcraft-modeling` and `solidcraft-editing` cover the commands, plane axes, ids, edge picks and the MCP workflow: load the one that fits first. This skill adds checks for errors SolidCraft does not report, and the work around a design kept in a repo.
 
-`$SKILL` below is the folder this file is in (`~/.claude/skills/solidcraft-checking` for a user install). Checked against SolidCraft 0.21.0. `scripts/tests/test_facts.py` checks every trap and convention below, and the facts behind the corrections in `solidcraft-modeling`. After a SolidCraft upgrade, run the tests and fix the text where they fail:
+`$SKILL` below is the folder this file is in (`~/.claude/skills/solidcraft-checking` for a user install). The scripts and `test_facts.py` were written against SolidCraft 0.21.0 and have NOT been re-run on 0.25 - 0.29 (the app is now at 0.29.0, file format `solidcraft/46`). `scripts/tests/test_facts.py` checks every trap and convention below, and the facts behind the corrections in `solidcraft-modeling`. After a SolidCraft upgrade, run the tests and fix the text where they fail:
 `PYTHONDONTWRITEBYTECODE=1 uv run --no-project --with pytest --with build123d pytest -p no:cacheprovider $SKILL/scripts/tests`
 
 ## Scripts
@@ -23,10 +23,11 @@ In `$SKILL/scripts/`:
 ## Steps to add
 
 1. **Parameters and features.** Each parameter comment states the allowed range ("whole number, 4 or more"): the user reads it in the Parameters table, and SolidCraft enforces no range. Derive sizes from measured values, so that a count parameter changes how many features there are, not how big they are. An expression that more than one sketch or feature uses becomes a named parameter. Add the derived numbers the user needs (parts to print) and mark the driving parameters favourite (`parameters.favorite`). Give each thing the user thinks of (a port, a row of standoffs) its own feature, named after it, so it can be found and changed on its own. Choose the origin so that no sketch dimension reaches 0 for any allowed value (trap 1).
-2. **Every sketch at dof 0.** A sketch with dof left can solve to a different shape after a parameter change, without an error. `run.py` lists them.
+2. **Every sketch at dof 0.** A sketch with dof left can solve to a different shape after a parameter change, without an error. `run.py` lists them. Sketches of a model built by hand on 0.29.0 (angled plates, T-slot) were left at dof 4 to 16; sketch chamfers on several corners also raise the dof. Add dimensions or constraints, or say in the report that the sketch is not fully constrained.
 3. **Every allowed value.** One script of `parameters.change` commands walks each driving parameter to both ends of its range, one change after another, and back to the default, as edits in the app do: trap 1 fails only on the change after the one that reaches 0. Put a `document.inspect {measure: true}` after each end of a range and run the walk with `run.py walk.json --in <design>`. Every state must be clean: no `FAIL`, no `SKETCH`, and `BODY` volumes and centres of mass that match the values you compute for that state. A boolean retry can leave the geometry wrong with only a `WARN` line, and the volume shows it (trap 4); a mirrored sketch (trap 1) keeps the volume and moves the centre of mass.
 4. **Exact check** when a port has a reference, or a volume gap leaves doubt: export STEP (`file.export {path, bodies}`) and run `compare_step.py`. Before porting, in SolidCraft's own chat or any MCP client, call `skill_reference {"skill":"solidcraft-checking","file":"reference/porting.md"}`. Elsewhere, read `$SKILL/reference/porting.md`.
 5. **Kept in a repo.** Save as `<name>.json` with `run.py build.json --save <name>.json`: a `.json` design stays plain JSON when it is saved again, so git diffs stay readable. Saving over a file leaves `<name>.json.bak`, so ignore `*.bak`. From then on the design file is the source, and changes go into it with `--in <design> --save <design>`. Copy `$SKILL/templates/test_design.py` next to the design, fill in its cases, set its tolerance as its comment says, and run it until it passes. Expected values come from an exact reference when porting, from hand calculation for simple shapes, or from a build the user has reviewed. After a change, update frozen values only where the change is meant to change them.
+6. **Analytic check of corner fillets.** For fillets where edges meet at a vertex, compute the volume from the formulas in `solidcraft-modeling` (vertex blend removal; rounded cube) and compare it with `measure`. Seen on 0.29.0 on 40 mm cubes: 0.002 % at R5 (12 edges), 0.003 % at R15 and 0.013 % at R39 (3 edges), 0.025 % (9 mm3) at R19 on all 12 edges. A gap of that size is a match; a larger gap or a changed face count means the fillet is wrong.
 
 ## Traps
 
@@ -38,6 +39,7 @@ In `$SKILL/scripts/`:
 6. **Expressions.** They have `+ - * / ^ %`, `sin cos tan asin acos atan atan2 sqrt abs min max floor ceil round mod trunc exp ln log log10 pow sign hypot` (`log` is base 10), `pi` and units; no `if` and no comparisons. Build steps from `floor`, `mod`, `min`, `max` and `sign`, which gives 1 at 0. `asin acos atan atan2` return angles, so a unitless parameter cannot hold them.
 7. **Snapping.** A point created exactly on an existing point or the origin becomes coincident with it (`connect` defaults to true).
 8. **Repeated body names.** A repeated `body_name` is renamed (`Body1`) without an error, so `targets` reach only the first body.
+9. **Offset sign.** On a rectangle chain `sketch.offset` goes inward with a positive distance (0.29.0). The wrong sign still succeeds and gives a wrong volume (a full block): the volume check catches it.
 
 ## Conventions
 
