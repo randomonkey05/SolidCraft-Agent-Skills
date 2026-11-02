@@ -33,6 +33,11 @@ When the final design has screw holes, tapped holes, counterbores, slots, pocket
 
 A value measured on the final design is **Verified**. A value taken from the build parameters is **Inferred**. A value with no known process or load behind its limit is **Unverified**: say which starting value was used and that it still needs confirming.
 
+Examples of how to class a claim:
+- Volume of the final body equal to the analytic value (e.g. plate and cut volumes added up, or the rounded-cube formula for filleted corners) within about 0.03 %: **Verified**. Seen on 0.29.0: 0.002 % on R5 corner fillets, 0.025 % on R19 fillets of all 12 cube edges (cause not investigated).
+- A feature that behaves as a release video says but was never run on the MCP (cross-design paste, point cloud, equation curve, expressions in rectangle coordinates): **Unverified**, label it "only from the video".
+- A dimension read from a drawing where edges are not parallel to the axes or the shape is estimated (for example an angled plate, a T-slot): **Inferred**; list it under open risks as "interpretation to confirm with the user" and name the assumption used.
+
 ## Process limits: where to look
 This skill holds no design-for-manufacturing numbers of its own. Take the process from the design lock (see `solidcraft-requirements-and-sanity`), load the skills for it, and check the final geometry against what they say. Do not rely on memory of their values.
 
@@ -57,6 +62,8 @@ Filling gaps between skills:
 2. If the process skill has no value for a feature (for example hole edge distance in a flat-pack plate), take it from the next skill in the table and say where it came from.
 3. If two skills give different limits for the same feature, use the stricter one and name both.
 4. If no skill has a value, mark the claim Unverified and list the missing value under open risks. Do not invent a limit, and do not edit another skill from here: report the gap so it can be added there.
+
+If a listed skill is not installed, say so and mark the rows it would have covered Unverified.
 
 ## Optional manifest
 For files that go to other people, write `<model>_manifest.json` next to them: file name, size, modified time, SHA-256, the source design, tool versions, checks actually run, and the three claim lists below. Only record checks that really ran.

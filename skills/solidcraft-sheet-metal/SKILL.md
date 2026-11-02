@@ -14,6 +14,7 @@ Suggested habits: send a screenshot of the folded and the flat state, and keep o
 ## 1. Read the source first
 - A bent part has TWO sets of dimensions, folded and flat. If no flat pattern is given, build the part, then state that the flat dimensions are assumed and ask for the expected flat pattern. (On the edge-flange bracket the first build gave 98.069 against 103.217 expected.)
 - Tutorial videos: transcribe the audio first. A silent video (mean volume around -91 dB gives an empty transcript) needs its dimensions read from frames: make contact sheets with ffmpeg and timestamps, then take full-resolution frames of the dimensioned sketch and of the Create Flat Pattern dialog, and measure unlabeled positions in pixels against a known width, for example 50 mm = 260 px. The flat-pattern dialog lists the bend count, the angles and the flat size, so use them as a check (phone stand: 7 bends, matched).
+- A drawing whose edges are not parallel to the base axes (an isometric view of an angled plate) hides the real bend line: say which interpretation you built (hinge parallel to x, rotated hinge, slanted outer face) and ask the user. In one angled-plate test the left plate's edges looked about 43 deg and 55 deg against 18 deg for the base; the model was built with the hinge parallel to x and flagged as unconfirmed.
 - Spoken numbers are often wrong. The frames give the numbers.
 - When real flat patterns are provided, compare them against the model feature by feature (perforation, windows, steps, ears, holes, relief notches) before rebuilding.
 
@@ -60,6 +61,8 @@ Bend maths: BA = (R + K*t) * angle_rad. The outer setback at 90 deg = R + t. Fla
 
 ## 7. Export
 `save`, `sheet.export_dxf {body, path, bend_notes:true}`, `sheet.export_bend_table {body, format:"csv", path}`, `export` as 3mf or stl, and an isometric screenshot. The folder must exist before `save` or `export` (error `its folder does not exist`), so create it first.
+
+Release 0.28 (only from the update video, not tested here): the flat pattern DXF organises cutting geometry, bend directions and bend notes. `bend_notes:true` already asks for the notes; look at the layers of a real export before telling the user how the DXF is organised.
 
 Before sending a flat pattern to a shop, run the manufacturability review in `solidcraft-dfm-review` (generic checks in its `sheet-metal.md`; for SendCutSend, `sendcutsend.md` with per-SKU limits and a DXF measuring script). Build the rule with the shop's bend radius and K factor first, so the flat length matches what they will cut.
 
